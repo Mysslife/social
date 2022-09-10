@@ -1,0 +1,91 @@
+.profile {
+  display: flex;
+  width: 100%;
+}
+
+.profileRight {
+  flex: 9;
+}
+.profileCover {
+  position: relative;
+  height: 320px;
+}
+.profileCoverImg {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+.profileUserImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 250px;
+  border: 3px solid white;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+.profileUsername {
+  font-size: 24px;
+}
+.profileUserDesc {
+  font-weight: 300;
+}
+
+.profileRightBottom {
+  display: flex;
+}
+
+/* RIGHTBAR - PROFILE */
+.rightbarTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.rightbarInfo {
+  margin-bottom: 30px;
+}
+.rightbarInfoItem {
+  margin-bottom: 10px;
+}
+.rightbarInfoKey {
+  font-weight: 500;
+  margin-right: 15px;
+  color: #555;
+}
+.rightbarInfoValue {
+  font-weight: 300;
+}
+
+.rightbarFollowingContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rightbarFollowing {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.rightbarFollowingImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.rightbarFollowingName {
+  margin-top: 4px;
+}

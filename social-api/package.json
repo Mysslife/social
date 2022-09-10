@@ -1,0 +1,23 @@
+{
+  "name": "social-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.3",
+    "morgan": "^1.10.0",
+    "timeago.js": "^4.0.2"
+  }
+}
