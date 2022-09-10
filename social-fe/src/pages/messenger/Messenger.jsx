@@ -17,13 +17,7 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   // SOCKET: ============================
-  // const [socket, setSocket] = useState(null);
-  // useEffect(() => {
-  // setSocket(io("ws://localhost:8900"));
-  // }, []);
-
-  // Hoặc lấy socket bằng cách useRef thì nhanh hơn bội phần nhưng sẽ luôn bị connect lại socket server mỗi khi F5, không hay lắm, nên dùng useEffect:
-  const socket = useRef();
+   const socket = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -32,8 +26,7 @@ const Messenger = () => {
 
     // GET MESSAGE:
     socket.current.on("getMessage", (data) => {
-      // format các key của arrivalMessage thế này để push vào trong messages:
-      setArrivalMessage({
+            setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createAt: Date.now(),
@@ -48,11 +41,9 @@ const Messenger = () => {
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChat]);
 
-  // useEffect này là để mỗi khi có 1 user login vào server socket thì phải emit lên socket server event add event để socket server lưu giữ ID của user mới login này. Phía socket server không thể lưu trực tiếp được user ID mỗi khi user login nên bắt buộc phải emit event này từ phía client để socket server lấy được user ID để lưu giữ và xử lý!
-  useEffect(() => {
+   useEffect(() => {
     socket.current?.emit("addUser", currentUser._id);
-    // Ở phía client, thì sau khi login và emit event addUser thì phía socket server đã nhận dữ liệu mới là user mới login và add vào mảng users và sau đó lại trả về client toàn bộ users đã login để phía client có thể xử lý login, filter, lọc với mảng users đã login.
-    socket.current.on("getUsers", (users) => {
+     socket.current.on("getUsers", (users) => {
       // setOnlineUsers(users);
       setOnlineUsers(
         currentUser.followings.filter((f) => users.some((u) => u.userId === f))
@@ -104,8 +95,6 @@ const Messenger = () => {
     };
 
     // SOCKET:
-    // Thực tế thì khi gửi lên socket server thì phải gửi kèm thêm cả conversationId để khi receiver nhận được dữ liệu từ socket sv trả về có conversationId để check điều kiện nếu currentChat._id === conversation._id thì mới hiển thị tin nhắn mới. Nhưng thôi trong trường hợp này thì chỉ cần như này là đủ. Còn thực tế nếu chỉ có mỗi senderId nhưng không có conversationId thì khi senderId gửi tin nhắn thì ngoài tin nhắn riêng thì mọi group khác có chứa senderId và receiverId thì receiver sẽ nhận được cùng nội dung các tin nhắn từ sender nhưng trong mọi group và như thế là sai. Nên mới bảo thực tế cần có conversationId để check nếu conversationId === currentChat._id thì mới hiển thị tin nhắn mới cho đúng một cuộc trò chuyện dù là private hay group. Nói chung đã tự nghiệm ra.
-    // Đoạn text trên đối chiếu với dòng 47.
     const receiverId = currentChat.members.find(
       (memberId) => currentUser._id !== memberId
     );
